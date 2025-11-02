@@ -11,6 +11,10 @@
 		B41D40762EB7B0BE008827BC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41D40752EB7B0BE008827BC /* ContentView.swift */; };
 		B41D40782EB7B0C0008827BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B41D40772EB7B0C0008827BC /* Assets.xcassets */; };
 		B41D407B2EB7B0C0008827BC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B41D407A2EB7B0C0008827BC /* Preview Assets.xcassets */; };
+		B4E868572EB7C1B200ABC8D0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E868562EB7C1B200ABC8D0 /* User.swift */; };
+		B4E868592EB7C22E00ABC8D0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E868582EB7C22E00ABC8D0 /* Card.swift */; };
+		B4E8685B2EB7C49000ABC8D0 /* UserCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E8685A2EB7C49000ABC8D0 /* UserCollection.swift */; };
+		B4E8685D2EB7C4CC00ABC8D0 /* UserNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E8685C2EB7C4CC00ABC8D0 /* UserNotification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		B41D40752EB7B0BE008827BC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B41D40772EB7B0C0008827BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B41D407A2EB7B0C0008827BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B4E868562EB7C1B200ABC8D0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B4E868582EB7C22E00ABC8D0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		B4E8685A2EB7C49000ABC8D0 /* UserCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollection.swift; sourceTree = "<group>"; };
+		B4E8685C2EB7C4CC00ABC8D0 /* UserNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,10 @@
 		B4E868532EB7B60500ABC8D0 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				B4E868562EB7C1B200ABC8D0 /* User.swift */,
+				B4E868582EB7C22E00ABC8D0 /* Card.swift */,
+				B4E8685A2EB7C49000ABC8D0 /* UserCollection.swift */,
+				B4E8685C2EB7C4CC00ABC8D0 /* UserNotification.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -162,7 +174,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B41D40762EB7B0BE008827BC /* ContentView.swift in Sources */,
+				B4E868572EB7C1B200ABC8D0 /* User.swift in Sources */,
 				B41D40742EB7B0BD008827BC /* prjTradingCardApp.swift in Sources */,
+				B4E8685B2EB7C49000ABC8D0 /* UserCollection.swift in Sources */,
+				B4E868592EB7C22E00ABC8D0 /* Card.swift in Sources */,
+				B4E8685D2EB7C4CC00ABC8D0 /* UserNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
