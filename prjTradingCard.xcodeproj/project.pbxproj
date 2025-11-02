@@ -51,8 +51,10 @@
 		B41D40722EB7B0BD008827BC /* prjTradingCard */ = {
 			isa = PBXGroup;
 			children = (
+				B4E868552EB7B62000ABC8D0 /* database */,
+				B4E868542EB7B61600ABC8D0 /* view */,
+				B4E868532EB7B60500ABC8D0 /* model */,
 				B41D40732EB7B0BD008827BC /* prjTradingCardApp.swift */,
-				B41D40752EB7B0BE008827BC /* ContentView.swift */,
 				B41D40772EB7B0C0008827BC /* Assets.xcassets */,
 				B41D40792EB7B0C0008827BC /* Preview Content */,
 			);
@@ -65,6 +67,28 @@
 				B41D407A2EB7B0C0008827BC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B4E868532EB7B60500ABC8D0 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		B4E868542EB7B61600ABC8D0 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				B41D40752EB7B0BE008827BC /* ContentView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		B4E868552EB7B62000ABC8D0 /* database */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
