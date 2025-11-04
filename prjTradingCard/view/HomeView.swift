@@ -12,7 +12,7 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            // Background gradient
+            // background color
             LinearGradient(
                 gradient: Gradient(colors: [
                     Color(red: 0.85, green: 0.88, blue: 0.95),
@@ -25,11 +25,50 @@ struct HomeView: View {
             
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    // Header with cards and profile
-                    HeaderSectionView()
+                    // header
+                    HStack {
+                        VStack(spacing: 5) {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.white)
+                                    .frame(width: 80, height: 80)
+                                
+                                Circle()
+                                    .fill(
+                                        RadialGradient(
+                                            gradient: Gradient(colors: [Color.red, Color.orange, Color.purple]),
+                                            center: .center,
+                                            startRadius: 5,
+                                            endRadius: 40
+                                        )
+                                    )
+                                    .frame(width: 75, height: 75)
+                                
+                                Image("tcgpfp")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 70, height: 70)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                    .shadow(radius: 7)
+                            }
+                            
+                            Text("Lv. 67")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(.gray)
+                        }
+                        
+                        Spacer()
+                        
+                        HStack(spacing: 20) {
+                            IconButton(iconName: "envelope.fill", backgroundColor: Color.white)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .frame(maxWidth: .infinity, alignment: .center)
                         .padding(.top, 20)
                     
-                    // Pack Opening Section
+                    // pack opening
                     PackOpeningSectionView(showPackOpening: $showPackOpening)
                         .padding(.horizontal)
                     
@@ -37,10 +76,54 @@ struct HomeView: View {
                 }
             }
             
-            // Bottom Navigation Bar
+            // bottom Bar
             VStack {
                 Spacer()
-                BottomNavigationBar()
+                HStack {
+                    NavigationButton(iconName: "house.fill", isSelected: true)
+                    NavigationButton(iconName: "rectangle.grid.2x2.fill", isSelected: false)
+                    NavigationButton(iconName: "person.2.fill", isSelected: false)
+                    NavigationButton(iconName: "line.3.horizontal", isSelected: false)
+                }
+                .padding(.vertical, 12)
+                .padding(.horizontal, 10)
+                .background(
+                    ZStack {
+                        // frosted material
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .fill(.ultraThinMaterial)
+
+                        // soft tint gradient for color/depth
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .fill(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [Color.white.opacity(0.06), Color.blue.opacity(0.04)]),
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
+                            .blendMode(.overlay)
+
+                        // subtle white stroke for edge
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .stroke(Color.white.opacity(0.25), lineWidth: 1)
+                            .blur(radius: 0.5)
+                            .blendMode(.overlay)
+
+                        // glossy highlight
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .fill(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [Color.white.opacity(0.18), Color.white.opacity(0.03)]),
+                                    startPoint: .top,
+                                    endPoint: .center
+                                )
+                            )
+                            
+                    }
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+                .padding(.horizontal, 12)
             }
         }
         .fullScreenCover(isPresented: $showPackOpening) {
@@ -49,109 +132,7 @@ struct HomeView: View {
     }
 }
 
-struct HeaderSectionView: View {
-    var body: some View {
-        HStack(spacing: 0) {
-            // Left side - Card collection preview
-            HStack(spacing: -20) {
-                Image(systemName: "photo.fill")
-                    .resizable()
-                    .frame(width: 50, height: 70)
-                    .foregroundColor(.yellow)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.white)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.orange, lineWidth: 2)
-                    )
-                
-                Image(systemName: "photo.fill")
-                    .resizable()
-                    .frame(width: 50, height: 70)
-                    .foregroundColor(.green)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.white)
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.green, lineWidth: 2)
-                    )
-                
-                // More cards indicator
-                ZStack {
-                    Circle()
-                        .fill(Color.white)
-                        .frame(width: 45, height: 45)
-                    
-                    Image(systemName: "star.fill")
-                        .foregroundColor(.gray)
-                }
-                .padding(.leading, 10)
-                
-                Image(systemName: "chevron.right")
-                    .foregroundColor(.gray)
-                    .padding(.leading, 5)
-            }
-            .padding(.leading, 30)
-            
-            Spacer()
-            
-            // Center - Profile Avatar with level
-            VStack(spacing: 5) {
-                ZStack {
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                gradient: Gradient(colors: [Color.cyan.opacity(0.3), Color.blue.opacity(0.2)]),
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(width: 90, height: 90)
-                    
-                    Circle()
-                        .fill(Color.white)
-                        .frame(width: 80, height: 80)
-                    
-                    // Avatar image (placeholder)
-                    Circle()
-                        .fill(
-                            RadialGradient(
-                                gradient: Gradient(colors: [Color.red, Color.orange, Color.purple]),
-                                center: .center,
-                                startRadius: 5,
-                                endRadius: 40
-                            )
-                        )
-                        .frame(width: 75, height: 75)
-                        .overlay(
-                            Image(systemName: "flame.fill")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .foregroundColor(.white)
-                        )
-                }
-                
-                Text("Lv. 49")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(.gray)
-            }
-            
-            Spacer()
-            
-            // Right side - Action buttons
-            HStack(spacing: 15) {
-                IconButton(iconName: "tray.fill", backgroundColor: Color.blue.opacity(0.15))
-                IconButton(iconName: "envelope.fill", backgroundColor: Color.white)
-                IconButton(iconName: "cube.fill", backgroundColor: Color.white)
-            }
-            .padding(.trailing, 30)
-        }
-    }
-}
+
 
 struct IconButton: View {
     let iconName: String
@@ -175,7 +156,7 @@ struct PackOpeningSectionView: View {
     
     var body: some View {
         ZStack {
-            // Card background with gradient
+            // card background with gradient
             RoundedRectangle(cornerRadius: 25)
                 .fill(
                     LinearGradient(
@@ -190,7 +171,7 @@ struct PackOpeningSectionView: View {
                 .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
             
             VStack(spacing: 20) {
-                // Pack images
+                // pack images (placeholder, will put actual images later)
                 HStack(spacing: -30) {
                     PackCardView(
                         colors: [Color.blue, Color.cyan],
@@ -214,12 +195,12 @@ struct PackOpeningSectionView: View {
                 }
                 .padding(.top, 20)
                 
-                // Timer and button
+                // timer and button
                 HStack(spacing: 20) {
                     HStack(spacing: 8) {
                         Image(systemName: "clock.fill")
                             .foregroundColor(.gray)
-                        Text("06 hr 00 min")
+                        Text("06 hr 07 min")
                             .font(.system(size: 14, weight: .medium))
                             .foregroundColor(.gray)
                     }
@@ -236,7 +217,7 @@ struct PackOpeningSectionView: View {
                         HStack(spacing: 5) {
                             Image(systemName: "suit.diamond.fill")
                                 .foregroundColor(.yellow)
-                            Text("56")
+                            Text("67")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(.black)
                         }
@@ -251,21 +232,20 @@ struct PackOpeningSectionView: View {
                 .padding(.bottom, 20)
             }
             
-            // Scroll indicator (top right)
             VStack {
                 HStack {
                     Spacer()
                     ZStack {
-                        Circle()
+                        Rectangle()
                             .fill(Color.white)
-                            .frame(width: 40, height: 40)
+                            .frame(width: 50, height: 27).cornerRadius(10)
                         
                         Image(systemName: "chevron.right")
                             .foregroundColor(.gray)
                             .font(.system(size: 14, weight: .bold))
                     }
-                    .padding(.trailing, 15)
-                    .padding(.top, 15)
+                    .padding(.trailing, -7)
+                    .padding(.top, -10)
                 }
                 Spacer()
             }
@@ -299,7 +279,7 @@ struct PackCardView: View {
             VStack {
                 Spacer()
                 
-                // Pack title
+                // pack title
                 VStack(spacing: 2) {
                     Text(title)
                         .font(.system(size: 10, weight: .bold))
@@ -317,7 +297,7 @@ struct PackCardView: View {
                 .padding(.bottom, 10)
             }
             
-            // Decorative pattern
+            // pattern for the bubble
             Circle()
                 .fill(Color.white.opacity(0.1))
                 .frame(width: 60, height: 60)
@@ -331,98 +311,8 @@ struct PackCardView: View {
     }
 }
 
-struct BottomNavigationBar: View {
-    var body: some View {
-        HStack(spacing: 0) {
-            NavigationButton(iconName: "house.fill", isSelected: true)
-            NavigationButton(iconName: "rectangle.grid.2x2.fill", isSelected: false)
-            NavigationButton(iconName: "person.2.fill", isSelected: false)
-            NavigationButton(iconName: "bag.fill", isSelected: false, hasBadge: true)
-            NavigationButton(iconName: "line.3.horizontal", isSelected: false)
-        }
-        .padding(.vertical, 12)
-        .background(
-            RoundedRectangle(cornerRadius: 0)
-                .fill(Color(UIColor.systemBackground))
-                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: -5)
-        )
-    }
-}
 
-struct NavigationButton: View {
-    let iconName: String
-    let isSelected: Bool
-    var hasBadge: Bool = false
-    
-    var body: some View {
-        ZStack(alignment: .topTrailing) {
-            Button(action: {}) {
-                VStack(spacing: 4) {
-                    Image(systemName: iconName)
-                        .font(.system(size: 24))
-                        .foregroundColor(isSelected ? .blue : .gray)
-                }
-                .frame(maxWidth: .infinity)
-            }
-            
-            if hasBadge {
-                Circle()
-                    .fill(Color.red)
-                    .frame(width: 8, height: 8)
-                    .offset(x: 8, y: 8)
-            }
-        }
-    }
-}
 
-// Floating Mission Button
-struct FloatingMissionButton: View {
-    var body: some View {
-        VStack {
-            Spacer()
-            HStack {
-                Spacer()
-                Button(action: {}) {
-                    VStack(spacing: 5) {
-                        ZStack {
-                            Circle()
-                                .fill(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [Color.green, Color.teal]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                                .frame(width: 60, height: 60)
-                                .shadow(color: Color.green.opacity(0.4), radius: 10, x: 0, y: 5)
-                            
-                            Image(systemName: "checklist")
-                                .font(.system(size: 28))
-                                .foregroundColor(.white)
-                            
-                            // Notification badge
-                            Circle()
-                                .fill(Color.red)
-                                .frame(width: 20, height: 20)
-                                .overlay(
-                                    Text("!")
-                                        .font(.system(size: 12, weight: .bold))
-                                        .foregroundColor(.white)
-                                )
-                                .offset(x: 20, y: -20)
-                        }
-                        
-                        Text("Missions")
-                            .font(.system(size: 11, weight: .semibold))
-                            .foregroundColor(.gray)
-                    }
-                }
-                .padding(.trailing, 20)
-                .padding(.bottom, 90)
-            }
-        }
-    }
-}
 
 #Preview {
     HomeView()
