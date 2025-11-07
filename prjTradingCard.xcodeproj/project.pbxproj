@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C50DC002EBCDA44001BD2AE /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C50DBFF2EBCDA28001BD2AE /* SignUp.swift */; };
+		6C50DC022EBCDB72001BD2AE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C50DC012EBCDB64001BD2AE /* LoginView.swift */; };
+		6C50DC272EBE3FB6001BD2AE /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C50DC262EBE3FB1001BD2AE /* AuthManager.swift */; };
+		6C50DC292EBE419C001BD2AE /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C50DC282EBE419C001BD2AE /* AuthManager.swift */; };
 		6CC3B8902EB7CE5E00892B3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CC3B88F2EB7CE5E00892B3C /* GoogleService-Info.plist */; };
 		6CC3B8942EB7CFFB00892B3C /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6CC3B8932EB7CFFB00892B3C /* FirebaseCore */; };
 		6CC3B8962EB7D00E00892B3C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6CC3B8952EB7D00E00892B3C /* FirebaseAuth */; };
@@ -22,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C50DBFF2EBCDA28001BD2AE /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
+		6C50DC012EBCDB64001BD2AE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		6C50DC262EBE3FB1001BD2AE /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		6C50DC282EBE419C001BD2AE /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		6CC3B88F2EB7CE5E00892B3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B41D40702EB7B0BD008827BC /* prjTradingCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = prjTradingCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B41D40732EB7B0BD008827BC /* prjTradingCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prjTradingCardApp.swift; sourceTree = "<group>"; };
@@ -108,7 +116,11 @@
 		B4E868542EB7B61600ABC8D0 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				6C50DC262EBE3FB1001BD2AE /* AuthManager.swift */,
+				6C50DC012EBCDB64001BD2AE /* LoginView.swift */,
+				6C50DBFF2EBCDA28001BD2AE /* SignUp.swift */,
 				B41D40752EB7B0BE008827BC /* ContentView.swift */,
+				6C50DC282EBE419C001BD2AE /* AuthManager.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -194,12 +206,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C50DC002EBCDA44001BD2AE /* SignUp.swift in Sources */,
+				6C50DC272EBE3FB6001BD2AE /* AuthManager.swift in Sources */,
 				B41D40762EB7B0BE008827BC /* ContentView.swift in Sources */,
 				B4E868572EB7C1B200ABC8D0 /* User.swift in Sources */,
 				B41D40742EB7B0BD008827BC /* prjTradingCardApp.swift in Sources */,
 				B4E8685B2EB7C49000ABC8D0 /* UserCollection.swift in Sources */,
 				B4E868592EB7C22E00ABC8D0 /* Card.swift in Sources */,
+				6C50DC022EBCDB72001BD2AE /* LoginView.swift in Sources */,
 				B4E8685D2EB7C4CC00ABC8D0 /* UserNotification.swift in Sources */,
+				6C50DC292EBE419C001BD2AE /* AuthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
