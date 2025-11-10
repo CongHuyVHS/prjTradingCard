@@ -9,6 +9,7 @@ import Foundation
 
 struct User: Identifiable{
     let id = UUID()
+    let email: String
     let username: String
     let password: String
 }
