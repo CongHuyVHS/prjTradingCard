@@ -33,6 +33,8 @@ struct NavigationButton: View {
     }
 }
 
-#Preview {
-    NavigationButton(iconName: "house.fill", isSelected: true, hasBadge: true)
+struct NavigationButton_Preview: PreviewProvider {
+    static var previews: some View {
+        NavigationButton(iconName: "house.fill", isSelected: true, hasBadge: true)
+    }
 }

@@ -132,9 +132,8 @@ struct LoginView: View {
     
 }
 
-#Preview {
-    NavigationStack {
+struct LoginView_Preview: PreviewProvider {
+    static var previews: some View {
         LoginView()
-            .environmentObject(AuthManager())
     }
 }
