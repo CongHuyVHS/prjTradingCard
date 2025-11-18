@@ -156,9 +156,13 @@ struct SignUp: View {
     
 }
 
-#Preview {
-    NavigationStack {
-        SignUp()
-            .environmentObject(AuthManager())
+
+struct SignUp_Preview: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            SignUp()
+                .environmentObject(AuthManager())
+        }
     }
 }
+
