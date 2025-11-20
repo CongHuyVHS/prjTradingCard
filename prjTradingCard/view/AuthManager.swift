@@ -89,13 +89,12 @@ class AuthManager: ObservableObject {
                 }
         }
     
-    // creating of document in firestore under the Users Collection
+    // creation of document in firestore under the Users Collection
     private func createUserDocument(userId: String, email: String, username: String, completion: @escaping (Error?) -> Void) {
             let userData: [String: Any] = [
                 "userId": userId,
                 "email": email,
-                "username": username.lowercased(),
-                "createdAt": Timestamp(date: Date())
+                "username": username.lowercased()
             ]
             
             db.collection("users").document(userId).setData(userData) { error in
