@@ -379,6 +379,10 @@ struct RevealedCardView: View {
     }
 }
 
-#Preview {
-    PackOpeningView()
+
+
+struct PackOpeninView_Preview: PreviewProvider {
+    static var previews: some View {
+        PackOpeningView()
+    }
 }
