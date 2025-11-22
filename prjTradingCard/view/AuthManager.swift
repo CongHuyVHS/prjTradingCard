@@ -17,7 +17,7 @@ class AuthManager: ObservableObject {
     private let db = Firestore.firestore()
     
     init() {
-        self.user = Auth.auth().currentUser
+        self.user = nil
     }
     
     //  Register
@@ -94,7 +94,8 @@ class AuthManager: ObservableObject {
             let userData: [String: Any] = [
                 "userId": userId,
                 "email": email,
-                "username": username.lowercased()
+                "username": username.lowercased(),
+                "pfp": "tcgpfp"
             ]
             
             db.collection("users").document(userId).setData(userData) { error in
@@ -119,6 +120,38 @@ class AuthManager: ObservableObject {
                }
            }
        }
+    
+    
+    func updateProfilePfp(_ pfpName: String, completion: @escaping (Error?) -> Void) {
+        guard let userId = user?.uid else {
+            completion(AuthError.emptyFields)
+            return
+        }
+        
+        db.collection("users").document(userId).updateData([
+            "pfp": pfpName
+        ]) { error in
+            completion(error)
+        }
+    }
+    
+    func getUserPfp(completion: @escaping (String?) -> Void) {
+        guard let userId = user?.uid else {
+            completion(nil)
+            return
+        }
+        
+        db.collection("users").document(userId).getDocument { snapshot, error in
+            if let data = snapshot?.data(),
+               let pfp = data["pfp"] as? String {
+                completion(pfp)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    
 }
 
 // Auth Errors

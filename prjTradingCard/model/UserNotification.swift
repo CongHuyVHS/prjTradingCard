@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-struct UserNotification: Identifiable{
-    let id =  UUID()
-    let userId : Int
-    let cardId: Int
-    let message: String
-    let isRead = false
+struct UserNotification: Identifiable, Codable{
+    @DocumentID var id: String?
+    @DocumentID var userId: String?
+    @DocumentID var cardId: String?
+    var message: String
+    var isRead = false
     
 }

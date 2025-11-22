@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-struct UserCollection{
-    let userId: Int
-    let cardId: Int
+struct UserCollection: Codable{
+    @DocumentID var userId: String?
+    @DocumentID var cardId: String?
     
 }

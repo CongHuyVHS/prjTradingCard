@@ -11,10 +11,11 @@ struct NavigationButton: View {
     let iconName: String
     let isSelected: Bool
     var hasBadge: Bool = false
-    
+    var onTap: () -> Void = {}
+
     var body: some View {
         ZStack(alignment: .center) {
-            Button(action: {}) {
+            Button(action: { onTap() }) { 
                 VStack(spacing: 4) {
                     Image(systemName: iconName)
                         .font(.system(size: 24))
@@ -22,7 +23,7 @@ struct NavigationButton: View {
                 }
                 .frame(maxWidth: .infinity)
             }
-            // notification dot (use this if needed if implemented collection pack in the future)
+
             if hasBadge {
                 Circle()
                     .fill(Color.red)
