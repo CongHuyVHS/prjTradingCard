@@ -2,10 +2,13 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var showPackOpening = false
+    @StateObject private var viewModel = HomeViewModel()
+    @State private var goToSettings = false
     
     var body: some View {
         // Wrap the entire UI in a NavigationStack so NavigationLink will work
         NavigationStack {
+            
             ZStack {
                 // background color
                 LinearGradient(
@@ -39,19 +42,34 @@ struct HomeView: View {
                                         )
                                         .frame(width: 75, height: 75)
                                     
-                                    Image("tcgpfp")
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 70, height: 70)
-                                        .clipShape(Circle())
-                                        .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                                        .shadow(radius: 7)
+                                    if let pfpName = viewModel.user?.pfp {
+                                        Image(pfpName)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 70, height: 70)
+                                            .clipShape(Circle())
+                                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                            .shadow(radius: 7)
+                                    } else {
+                                        
+                                        Text("Loading...")
+                                            .font(.system(size: 14, weight: .medium))
+                                            .foregroundColor(.gray)
+                                        
+                                    }
                                 }
                                 
-                                Text("Lv. 67")
-                                    .font(.system(size: 14, weight: .medium))
-                                    .foregroundColor(.gray)
+                                if let username = viewModel.user?.username {
+                                    Text(username)
+                                        .font(.system(size: 14, weight: .medium))
+                                        .foregroundColor(.gray)
+                                } else {
+                                    Text("Loading...")
+                                        .font(.system(size: 14, weight: .medium))
+                                        .foregroundColor(.gray)
+                                }
                             }
+                            
                             
                             Spacer()
                             
@@ -73,12 +91,13 @@ struct HomeView: View {
                 
                 // bottom Bar
                 VStack {
+                    
                     Spacer()
                     HStack {
                         NavigationButton(iconName: "house.fill", isSelected: true)
                         NavigationButton(iconName: "rectangle.grid.2x2.fill", isSelected: false)
                         NavigationButton(iconName: "person.2.fill", isSelected: false)
-                        NavigationButton(iconName: "line.3.horizontal", isSelected: false)
+                        NavigationButton(iconName: "line.3.horizontal", isSelected: false) { goToSettings = true }
                             
                     }
                     .padding(.vertical, 12)
@@ -126,6 +145,13 @@ struct HomeView: View {
                 PackOpeningView()
             }
             .navigationBarHidden(true)
+            .onAppear {
+                viewModel.loadUser()
+            }
+            .navigationDestination(isPresented: $goToSettings) {
+                SettingsView()
+            }
+            
         }
     }
 }
@@ -197,7 +223,7 @@ struct PackOpeningSectionView: View {
                         HStack(spacing: 5) {
                             Image(systemName: "suit.diamond.fill")
                                 .foregroundColor(.yellow)
-                            Text("67")
+                            Text("le anh jeff")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(.black)
                         }

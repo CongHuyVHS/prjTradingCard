@@ -162,6 +162,7 @@ struct SignUp: View {
                 case .success(_):
                     print("Registration success")
                     isLoggedIn = true
+                    dismiss()
                 case .failure(let error):
                     errorMessage = error.localizedDescription
                 }
