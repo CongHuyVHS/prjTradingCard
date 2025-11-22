@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct PackData: Identifiable {
-    var id = UUID()
-    var name: String
-    var colors: [Color]
-    var isAvailable: Bool
+    let id = UUID()
+    let name: String
+    let colors: [Color]
+    let isAvailable: Bool 
 }

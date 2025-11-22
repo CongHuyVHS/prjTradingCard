@@ -79,6 +79,7 @@ struct HomeView: View {
                         NavigationButton(iconName: "rectangle.grid.2x2.fill", isSelected: false)
                         NavigationButton(iconName: "person.2.fill", isSelected: false)
                         NavigationButton(iconName: "line.3.horizontal", isSelected: false)
+                            
                     }
                     .padding(.vertical, 12)
                     .padding(.horizontal, 10)

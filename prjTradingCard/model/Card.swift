@@ -6,17 +6,16 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-enum rarity {
-case Common,Rare,Legendary
+
+struct Card: Identifiable, Codable{
+    @DocumentID var id: String?
+    var cardName: String
+    var cardRarity: CardRarity
+    var cardType: CardType
+    var cardImage: String
+    var cardDescription: String
 }
 
-struct Card: Identifiable{
-    let id = UUID()
-    let cardName: String
-    let cardRarity: rarity
-    let cardImage: String
-    let cardDescription: String
-}
-
-var card_data = Card(cardName:"GrassMuncher",cardRarity:rarity.Common,cardImage:"tcgpfp", cardDescription: "Stinky ahhh pokemon u feel me twin?")
+var card_data = Card(cardName:"GrassMuncher",cardRarity:CardRarity.common, cardType:CardType.grass, cardImage:"tcgpfp", cardDescription: "Stinky ahhh pokemon u feel me twin?")
