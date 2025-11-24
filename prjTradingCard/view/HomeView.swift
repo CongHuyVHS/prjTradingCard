@@ -4,6 +4,7 @@ struct HomeView: View {
     @State private var showPackOpening = false
     @StateObject private var viewModel = HomeViewModel()
     @State private var goToSettings = false
+    @State private var goToSocial = false
     
     var body: some View {
         // Wrap the entire UI in a NavigationStack so NavigationLink will work
@@ -96,7 +97,7 @@ struct HomeView: View {
                     HStack {
                         NavigationButton(iconName: "house.fill", isSelected: true)
                         NavigationButton(iconName: "rectangle.grid.2x2.fill", isSelected: false)
-                        NavigationButton(iconName: "person.2.fill", isSelected: false)
+                        NavigationButton(iconName: "person.2.fill", isSelected: false) { goToSocial = true }
                         NavigationButton(iconName: "line.3.horizontal", isSelected: false) { goToSettings = true }
                             
                     }
@@ -150,6 +151,9 @@ struct HomeView: View {
             }
             .navigationDestination(isPresented: $goToSettings) {
                 SettingsView()
+            }
+            .navigationDestination(isPresented: $goToSocial) {
+                FriendView()
             }
             
         }
@@ -317,5 +321,11 @@ struct PackCardView: View {
                 .frame(width: 40, height: 40)
                 .offset(x: 25, y: -50)
         }
+    }
+}
+
+struct Preview_HomeView: PreviewProvider {
+    static var previews: some View {
+        HomeView()
     }
 }
