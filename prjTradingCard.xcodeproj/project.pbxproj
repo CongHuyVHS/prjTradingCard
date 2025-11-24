@@ -20,6 +20,9 @@
 		6C364CBB2ED1240D0022EFB4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C364CBA2ED1240D0022EFB4 /* CardViewModel.swift */; };
 		6C364CBD2ED124570022EFB4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C364CBC2ED124570022EFB4 /* Theme.swift */; };
 		6C364D1D2ED218820022EFB4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C364D1C2ED218820022EFB4 /* HomeViewModel.swift */; };
+		6C364D2A2ED4E3360022EFB4 /* UserCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C364D292ED4E3360022EFB4 /* UserCollectionView.swift */; };
+		6C364D2C2ED4E33E0022EFB4 /* CardRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C364D2B2ED4E33E0022EFB4 /* CardRowView.swift */; };
+		6C364D2E2ED4E3D50022EFB4 /* CollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C364D2D2ED4E3D50022EFB4 /* CollectionViewModel.swift */; };
 		6C50DC002EBCDA44001BD2AE /* SignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C50DBFF2EBCDA28001BD2AE /* SignUp.swift */; };
 		6C50DC022EBCDB72001BD2AE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C50DC012EBCDB64001BD2AE /* LoginView.swift */; };
 		6C50DC292EBE419C001BD2AE /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C50DC282EBE419C001BD2AE /* AuthManager.swift */; };
@@ -51,6 +54,9 @@
 		6C364CBA2ED1240D0022EFB4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		6C364CBC2ED124570022EFB4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		6C364D1C2ED218820022EFB4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		6C364D292ED4E3360022EFB4 /* UserCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionView.swift; sourceTree = "<group>"; };
+		6C364D2B2ED4E33E0022EFB4 /* CardRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRowView.swift; sourceTree = "<group>"; };
+		6C364D2D2ED4E3D50022EFB4 /* CollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModel.swift; sourceTree = "<group>"; };
 		6C50DBFF2EBCDA28001BD2AE /* SignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp.swift; sourceTree = "<group>"; };
 		6C50DC012EBCDB64001BD2AE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		6C50DC282EBE419C001BD2AE /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -154,6 +160,9 @@
 				6C364CB62ECFC3B60022EFB4 /* SettingsView.swift */,
 				6C364CBA2ED1240D0022EFB4 /* CardViewModel.swift */,
 				6C364D1C2ED218820022EFB4 /* HomeViewModel.swift */,
+				6C364D292ED4E3360022EFB4 /* UserCollectionView.swift */,
+				6C364D2B2ED4E33E0022EFB4 /* CardRowView.swift */,
+				6C364D2D2ED4E3D50022EFB4 /* CollectionViewModel.swift */,
 				2876E3532ED25DD3009487B6 /* FriendView.swift */,
 				28A5E5D42ED260C200B55664 /* AddFriendView.swift */,
 				28A5E5D62ED2613F00B55664 /* FriendDetailView.swift */,
@@ -238,12 +247,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C364D1D2ED218820022EFB4 /* HomeViewModel.swift in Sources */,
+				6C364D2C2ED4E33E0022EFB4 /* CardRowView.swift in Sources */,
 				6C50DC002EBCDA44001BD2AE /* SignUp.swift in Sources */,
+				6C364D2A2ED4E3360022EFB4 /* UserCollectionView.swift in Sources */,
 				B41D40762EB7B0BE008827BC /* ContentView.swift in Sources */,
 				28B58C562EB7C88800A09A83 /* HomeView.swift in Sources */,
 				6C364CBB2ED1240D0022EFB4 /* CardViewModel.swift in Sources */,
 				B42C752C2ECCB0840048A37C /* CardView.swift in Sources */,
 				287A793F2EB9969D006025EB /* NavigationButton.swift in Sources */,
+				6C364D2E2ED4E3D50022EFB4 /* CollectionViewModel.swift in Sources */,
 				2876E3562ED25E95009487B6 /* SocialViewModel.swift in Sources */,
 				28B58C582EB7CA4900A09A83 /* PackOpeningView.swift in Sources */,
 				28C83D0A2EC16C6100026431 /* PackData.swift in Sources */,

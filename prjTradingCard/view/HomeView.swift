@@ -4,6 +4,7 @@ struct HomeView: View {
     @State private var showPackOpening = false
     @StateObject private var viewModel = HomeViewModel()
     @State private var goToSettings = false
+    @State private var goToCollection = false
     @State private var goToSocial = false
     
     var body: some View {
@@ -96,7 +97,7 @@ struct HomeView: View {
                     Spacer()
                     HStack {
                         NavigationButton(iconName: "house.fill", isSelected: true)
-                        NavigationButton(iconName: "rectangle.grid.2x2.fill", isSelected: false)
+                        NavigationButton(iconName: "rectangle.grid.2x2.fill", isSelected: false) { goToCollection = true }
                         NavigationButton(iconName: "person.2.fill", isSelected: false) { goToSocial = true }
                         NavigationButton(iconName: "line.3.horizontal", isSelected: false) { goToSettings = true }
                             
@@ -150,7 +151,10 @@ struct HomeView: View {
                 viewModel.loadUser()
             }
             .navigationDestination(isPresented: $goToSettings) {
-                SettingsView()
+                SettingsView(isLoggedIn: .constant(false))
+            }
+            .navigationDestination(isPresented: $goToCollection) {
+                UserCollectionView()
             }
             .navigationDestination(isPresented: $goToSocial) {
                 FriendView()

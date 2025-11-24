@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
+    @Binding var isLoggedIn: Bool
+    @EnvironmentObject var authManager: AuthManager
     
     var body: some View {
         ZStack {
@@ -168,11 +170,41 @@ struct SettingsView: View {
                                             .padding(.vertical, 14)
                                             .background(
                                                 LinearGradient(
-                                                    gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.8)]),
+                                                    gradient: Gradient(colors: [Color.blue, Color.yellow]),
                                                     startPoint: .leading,
                                                     endPoint: .trailing
                                                 )
                                             )
+                                            .cornerRadius(12)
+                                    }
+                                }
+                                .padding(20)
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        
+                        VStack(spacing: 16) {
+                            Text("Log out of your acount")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(.black)
+
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color.white)
+                                    .shadow(color: Color.black.opacity(0.08), radius: 10, x: 0, y: 4)
+
+                                VStack(spacing: 16) {
+                                
+                                    Button(action: {
+                                        isLoggedIn = false
+                                    }) {
+                                        Text("Logout")
+                                            .font(.system(size: 16, weight: .semibold))
+                                            .foregroundColor(.white)
+                                            .frame(maxWidth: .infinity)
+                                            .padding(.vertical, 14)
+                                            .background(.gray)
                                             .cornerRadius(12)
                                     }
                                 }
@@ -220,13 +252,7 @@ struct SettingsView: View {
                                             .foregroundColor(.white)
                                             .frame(maxWidth: .infinity)
                                             .padding(.vertical, 14)
-                                            .background(
-                                                LinearGradient(
-                                                    gradient: Gradient(colors: [Color.red, Color.red.opacity(0.8)]),
-                                                    startPoint: .leading,
-                                                    endPoint: .trailing
-                                                )
-                                            )
+                                            .background(.red)
                                             .cornerRadius(12)
                                     }
                                 }
@@ -246,5 +272,6 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(isLoggedIn: .constant(false))
+        .environmentObject(AuthManager())
 }
