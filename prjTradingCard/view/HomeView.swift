@@ -150,7 +150,7 @@ struct HomeView: View {
                 viewModel.loadUser()
             }
             .navigationDestination(isPresented: $goToSettings) {
-                SettingsView()
+                SettingsView(isLoggedIn: .constant(false))
             }
             .navigationDestination(isPresented: $goToCollection) {
                 UserCollectionView()
