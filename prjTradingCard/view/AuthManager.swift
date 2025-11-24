@@ -68,6 +68,7 @@ class AuthManager: ObservableObject {
         do {
             try Auth.auth().signOut()
             self.user = nil
+            
         } catch {
             print("\(error.localizedDescription)")
         }
