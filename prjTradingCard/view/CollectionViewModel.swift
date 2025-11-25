@@ -59,6 +59,31 @@ class CollectionViewModel: ObservableObject {
             }
     }
     
+    func fetchFriendCollection(userId: String) {
+        isLoading = true
+        
+        let db = Firestore.firestore()
+        db.collection("userCollection")
+            .whereField("userId", isEqualTo: userId)
+            .getDocuments { [weak self] snapshot, error in
+                guard let self = self else { return }
+                
+                if let error = error {
+                    print("Error fetching friend collection: \(error)")
+                    self.isLoading = false
+                    return
+                }
+                
+                guard let documents = snapshot?.documents else {
+                    self.isLoading = false
+                    return
+                }
+                
+                let cardIds = documents.compactMap { $0.data()["cardId"] as? String }
+                self.fetchCardDetails(cardCounts: Dictionary(cardIds.map { ($0, 1) }, uniquingKeysWith: +))
+            }
+    }
+    
     private func fetchCardDetails(cardCounts: [String: Int]) {
         let uniqueCardIds = Array(cardCounts.keys)
         
