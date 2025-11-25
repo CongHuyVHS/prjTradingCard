@@ -10,7 +10,7 @@ import SwiftUI
 struct FriendDetailView: View {
     @Environment(\.dismiss) var dismiss
     let friend: Friend
-    @ObservedObject var viewModel: SocialViewModel
+    @ObservedObject var viewModel = SocialViewModel()
     
     @State private var showRemoveAlert = false
     @State private var showResultAlert = false

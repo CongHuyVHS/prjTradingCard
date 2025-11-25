@@ -13,11 +13,29 @@ import FirebaseFirestore
 class AuthManager: ObservableObject {
     
     @Published var user: FirebaseAuth.User?
+    @Published var isLoggedIn = false
     
     private let db = Firestore.firestore()
+    private var authStateListenerHandle: AuthStateDidChangeListenerHandle?
     
     init() {
-        self.user = nil
+            self.user = Auth.auth().currentUser
+            self.isLoggedIn = (Auth.auth().currentUser != nil)
+            
+            
+            authStateListenerHandle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
+                DispatchQueue.main.async {
+                    self?.user = user
+                    self?.isLoggedIn = (user != nil)
+                    print("Auth state is changed, isloggedin:\(user != nil)")
+                }
+            }
+        }
+        
+     deinit {
+        if let handle = authStateListenerHandle {
+            Auth.auth().removeStateDidChangeListener(handle)
+        }
     }
     
     //  Register
@@ -44,6 +62,7 @@ class AuthManager: ObservableObject {
                         } else {
                             self.user = user
                             completion(.success(user))
+                            self.isLoggedIn = true
                         }
                     }
                 }
@@ -59,18 +78,21 @@ class AuthManager: ObservableObject {
             } else if let user = result?.user {
                 self.user = user
                 completion(.success(user))
+                self.isLoggedIn = true
             }
         }
     }
     
     // logout
     func logout() {
+        print("Starting logout...")
         do {
             try Auth.auth().signOut()
             self.user = nil
-            
+            self.isLoggedIn = false
+            print("Logout successful, isLoggedIn set to false")
         } catch {
-            print("\(error.localizedDescription)")
+            print("Logout error: \(error.localizedDescription)")
         }
     }
     
@@ -148,6 +170,88 @@ class AuthManager: ObservableObject {
                 completion(pfp)
             } else {
                 completion(nil)
+            }
+        }
+    }
+    
+    func updateUsername(_ newUsername: String, completion: @escaping (Error?) -> Void) {
+        guard let userId = user?.uid else {
+            completion(AuthError.emptyFields)
+            return
+        }
+        
+        let lowercasedUsername = newUsername.lowercased()
+        
+        // First check if username is available
+        checkUsernameAvailable(lowercasedUsername) { [weak self] isAvailable in
+            guard let self = self else { return }
+            
+            // Get current username to compare
+            self.getUsername { currentUsername in
+                // If it's the same username (case-insensitive), allow the update
+                if currentUsername?.lowercased() == lowercasedUsername {
+                    self.performUsernameUpdate(userId: userId, username: lowercasedUsername, completion: completion)
+                    return
+                }
+                
+                // If it's a different username, check availability
+                if !isAvailable {
+                    completion(AuthError.usernameAlreadyExists)
+                    return
+                }
+                
+                self.performUsernameUpdate(userId: userId, username: lowercasedUsername, completion: completion)
+            }
+        }
+    }
+
+    // Helper function to perform the actual update
+    private func performUsernameUpdate(userId: String, username: String, completion: @escaping (Error?) -> Void) {
+        print("Updating username in Firestore to: \(username) for user: \(userId)")
+        
+        db.collection("users").document(userId).updateData([
+            "username": username
+        ]) { error in
+            if let error = error {
+                print("Firestore username update error: \(error.localizedDescription)")
+            } else {
+                print("Username update successful!")
+            }
+            completion(error)
+        }
+    }
+
+    // Delete account
+    func deleteAccount(completion: @escaping (Error?) -> Void) {
+        guard let userId = user?.uid else {
+            completion(AuthError.emptyFields)
+            return
+        }
+        
+        print("Deleting account for user: \(userId)")
+        
+        // First delete user document from Firestore
+        db.collection("users").document(userId).delete { [weak self] error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print("Error deleting user document: \(error.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            // Then delete Firebase Auth account
+            Auth.auth().currentUser?.delete { error in
+                if let error = error {
+                    print("Error deleting auth account: \(error.localizedDescription)")
+                    completion(error)
+                } else {
+                    print("Account deleted successfully!")
+                    // Clear local state
+                    self.user = nil
+                    self.isLoggedIn = false
+                    completion(nil)
+                }
             }
         }
     }

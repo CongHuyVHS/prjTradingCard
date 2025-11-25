@@ -1,3 +1,4 @@
+
 //
 //  FriendView.swift
 //  prjTradingCard
@@ -8,7 +9,7 @@
 import SwiftUI
 
 struct FriendView: View {
-    @StateObject private var viewModel = SocialViewModel()
+    @EnvironmentObject var viewModel: SocialViewModel
      @State private var showAddFriend = false
      @State private var selectedFriend: Friend?
      @State private var showFriendDetail = false
@@ -122,8 +123,11 @@ struct FriendView: View {
                              ForEach(viewModel.filteredFriends) { friend in
                                  FriendRowView(friend: friend, viewModel: viewModel)
                                      .onTapGesture {
-                                         selectedFriend = friend
-                                         showFriendDetail = true
+                                         // Only allow tap if not loading
+                                         if !viewModel.isLoading {
+                                             selectedFriend = friend
+                                             showFriendDetail = true
+                                         }
                                      }
                              }
                          }
@@ -365,4 +369,5 @@ struct FriendView: View {
 
 #Preview {
     FriendView()
+        .environmentObject(SocialViewModel())
 }

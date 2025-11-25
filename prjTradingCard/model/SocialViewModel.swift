@@ -33,33 +33,56 @@ class SocialViewModel: ObservableObject {
     func loadFriends() {
         guard let userId = Auth.auth().currentUser?.uid else {
             errorMessage = "User not authenticated"
+            print("❌ No user authenticated")
             return
         }
         
+        print("🔍 Loading friends for userID:", userId)
         isLoading = true
         
-        // Load friends from Firestore
-        db.collection("users").document(userId).collection("friends")
+        db.collection("users")
+            .document(userId)
+            .collection("friends")
             .addSnapshotListener { [weak self] snapshot, error in
-                guard let self = self else { return }
                 
+                guard let self = self else { return }
                 self.isLoading = false
                 
                 if let error = error {
                     self.errorMessage = "Error loading friends: \(error.localizedDescription)"
+                    print("❌ Firestore error:", error.localizedDescription)
                     return
                 }
                 
+                print("📄 Snapshot received.")
+                print("➡️ Document count:", snapshot?.documents.count ?? 0)
+                
                 guard let documents = snapshot?.documents else {
+                    print("⚠️ No documents in snapshot")
                     self.friends = []
                     self.filteredFriends = []
                     return
                 }
                 
-                self.friends = documents.compactMap { doc -> Friend? in
-                    try? doc.data(as: Friend.self)
+                // PRINT RAW DOCUMENTS
+                for doc in documents {
+                    print("🟦 RAW DOC:", doc.documentID)
+                    print("   DATA:", doc.data())
                 }
                 
+                // Decode Friends
+                self.friends = documents.compactMap { doc in
+                    do {
+                        let friend = try doc.data(as: Friend.self)
+                        print("✅ Decoded friend:", friend)
+                        return friend
+                    } catch {
+                        print("❌ DECODING ERROR for doc \(doc.documentID):", error)
+                        return nil
+                    }
+                }
+                
+                print("👥 Total decoded friends:", self.friends.count)
                 self.filterFriends()
             }
     }
