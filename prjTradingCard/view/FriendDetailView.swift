@@ -15,6 +15,8 @@ struct FriendDetailView: View {
     @State private var showRemoveAlert = false
     @State private var showResultAlert = false
     @State private var resultMessage = ""
+    @State private var showCollection = false
+
     
     var body: some View {
         NavigationStack {
@@ -116,7 +118,7 @@ struct FriendDetailView: View {
                                 }
                             }
                             
-                            // view Collection button
+                            // view collection button
                             ActionButton(
                                 icon: "square.grid.2x2.fill",
                                 title: "View Collection",
@@ -124,6 +126,8 @@ struct FriendDetailView: View {
                             ) {
                                 // navigate to friend's collection
                                 // TODO: implement collection view
+                                showCollection = true
+                                
                             }
                             
                             // challenge button (might implement this in the future)
@@ -174,6 +178,9 @@ struct FriendDetailView: View {
                 }
             } message: {
                 Text(resultMessage)
+            }
+            .sheet(isPresented: $showCollection) {
+                FriendCollectionView(friend: friend)
             }
         }
     }

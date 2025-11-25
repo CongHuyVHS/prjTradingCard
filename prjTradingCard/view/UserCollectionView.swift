@@ -60,7 +60,7 @@ struct UserCollectionView: View {
                        ScrollView(.horizontal, showsIndicators: false) {
                            HStack(spacing: 12) {
                                // All Filter
-                               FilterType(
+                               TypeFilterPill(
                                    title: "All",
                                    isSelected: selectedFilter == nil,
                                    color: .white
@@ -72,7 +72,7 @@ struct UserCollectionView: View {
                                
                                // Type Filters
                                ForEach([CardType.fire, .water, .grass, .electric, .psychic, .rock, .dragon, .normal], id: \.self) { type in
-                                   FilterType(
+                                   TypeFilterPill(
                                        title: type.rawValue.capitalized,
                                        isSelected: selectedFilter == type,
                                        color: typeColors[type] ?? .gray
@@ -138,7 +138,7 @@ struct UserCollectionView: View {
        }
    }
 
-   struct FilterType: View {
+   struct TypeFilterPill: View {
        let title: String
        let isSelected: Bool
        let color: Color
@@ -257,3 +257,4 @@ struct UserCollectionView_Previews: PreviewProvider {
         UserCollectionView()
     }
 }
+

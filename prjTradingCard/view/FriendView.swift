@@ -12,7 +12,6 @@ struct FriendView: View {
     @EnvironmentObject var viewModel: SocialViewModel
      @State private var showAddFriend = false
      @State private var selectedFriend: Friend?
-     @State private var showFriendDetail = false
      
      var body: some View {
          ZStack {
@@ -123,11 +122,7 @@ struct FriendView: View {
                              ForEach(viewModel.filteredFriends) { friend in
                                  FriendRowView(friend: friend, viewModel: viewModel)
                                      .onTapGesture {
-                                         // Only allow tap if not loading
-                                         if !viewModel.isLoading {
-                                             selectedFriend = friend
-                                             showFriendDetail = true
-                                         }
+                                         selectedFriend = friend
                                      }
                              }
                          }
@@ -170,11 +165,9 @@ struct FriendView: View {
          .sheet(isPresented: $showAddFriend) {
              AddFriendView(viewModel: viewModel)
          }
-         .sheet(isPresented: $showFriendDetail) {
-             if let friend = selectedFriend {
-                 FriendDetailView(friend: friend, viewModel: viewModel)
-             }
-         }
+         .sheet(item: $selectedFriend) { friend in
+             FriendDetailView(friend: friend, viewModel: viewModel)
+         } 
          .navigationBarTitleDisplayMode(.inline)
          .navigationTitle("Friends")
      }
