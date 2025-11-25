@@ -9,27 +9,27 @@ Current Features (v1.0.0)
 
 In the first official release, we implemented the core systems that make the DOODLEMON experience playable:
 
-- Pokémon Pack System
+✔️ Pokémon Pack System
 
 Open randomized packs.
 
 Cards are generated using RNG logic with rarity weighting.
 
-- Card Collection
+✔️ Card Collection
 
 Every card you pull is saved in your personal collection.
 
 Cards use borrowed artwork during prototyping.
 
-- Social Hub
+✔️ Social Hub
 
 View other players and interact with the community.
 
-- Settings Menu
+✔️ Settings Menu
 
 Customize your app experience (music, avatar, name, etc.)
 
-- Additional Gameplay & UI Features
+✔️ Additional Gameplay & UI Features
 
 Smooth animations
 
@@ -42,7 +42,7 @@ Upcoming Features / Future Plans
 
 We have several major features planned for future releases:
 
- - Arena Mode
+ 🏟️ Arena Mode
 
 Players will be able to:
 
@@ -52,7 +52,7 @@ Challenge other players
 
 
 
-- Original Artwork
+🎨 Original Artwork
 
 We currently use third-party artwork only for practice.
 
