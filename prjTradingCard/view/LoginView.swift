@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct LoginView: View {
-    @Binding var isLoggedIn: Bool
     @State private var email = ""
     @State private var password = ""
     @State private var errorMessage: String?
@@ -56,7 +55,7 @@ struct LoginView: View {
                         
                         TextField("", text: $email)
                             .padding()
-                            .background(Color.white.opacity(0.9))
+                            .background(Color.white)
                             .cornerRadius(10)
                             .autocapitalization(.none)
                     }
@@ -69,7 +68,7 @@ struct LoginView: View {
                         
                         SecureField("", text: $password)
                             .padding()
-                            .background(Color.white.opacity(0.9))
+                            .background(Color.white)
                             .cornerRadius(10)
                     }
                     
@@ -111,7 +110,7 @@ struct LoginView: View {
             }
         }
         .navigationDestination(isPresented: $showSignUp) {
-            SignUp(isLoggedIn: $isLoggedIn)
+            SignUp()
         }
     }
     
@@ -129,7 +128,7 @@ struct LoginView: View {
                 switch result {
                 case .success(_):
                     print("Login success")
-                    isLoggedIn = true
+                    
                 case .failure(let error):
                     errorMessage = error.localizedDescription
                 }
@@ -140,6 +139,6 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(isLoggedIn: .constant(false))
+    LoginView()
         .environmentObject(AuthManager())
 }

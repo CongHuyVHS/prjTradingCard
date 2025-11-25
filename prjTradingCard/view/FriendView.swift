@@ -1,3 +1,4 @@
+
 //
 //  FriendView.swift
 //  prjTradingCard
@@ -8,7 +9,7 @@
 import SwiftUI
 
 struct FriendView: View {
-    @StateObject private var viewModel = SocialViewModel()
+    @EnvironmentObject var viewModel: SocialViewModel
      @State private var showAddFriend = false
      @State private var selectedFriend: Friend?
      
@@ -361,4 +362,5 @@ struct FriendView: View {
 
 #Preview {
     FriendView()
+        .environmentObject(SocialViewModel())
 }

@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var isLoggedIn = false
+    @StateObject private var authManager = AuthManager()
+    
     var body: some View {
         NavigationStack {
-            
-            if isLoggedIn {
+            if authManager.isLoggedIn {
                 HomeView()
-                
+                    .environmentObject(authManager)
             } else {
-                LoginView(isLoggedIn: $isLoggedIn)
+                LoginView()
+                    .environmentObject(authManager)
             }
         }
         .navigationBarBackButtonHidden(true)
-        
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignUp: View {
-    @Binding var isLoggedIn: Bool
+    
     @State private var email = ""
     @State private var username = ""
     @State private var password = ""
@@ -18,7 +18,7 @@ struct SignUp: View {
     
     var body: some View {
         ZStack {
-            // Background
+            // background
             LinearGradient(
                 gradient: Gradient(colors: [.red,.yellow, .red]),
                 startPoint: .topLeading,
@@ -43,7 +43,7 @@ struct SignUp: View {
                 }
                 .padding(.bottom, 30)
                 
-                // SignUp
+                // signUp
                 VStack(spacing: 20) {
                     
                     VStack(alignment: .leading, spacing: 8) {
@@ -53,7 +53,7 @@ struct SignUp: View {
                         
                         TextField("", text: $email)
                             .padding()
-                            .background(Color.white.opacity(0.9))
+                            .background(Color.white)
                             .cornerRadius(10)
                             .autocapitalization(.none)
                             .autocorrectionDisabled()
@@ -66,7 +66,7 @@ struct SignUp: View {
                         
                         TextField("", text: $username)
                             .padding()
-                            .background(Color.white.opacity(0.9))
+                            .background(Color.white)
                             .cornerRadius(10)
                             .autocapitalization(.none)
                             .autocorrectionDisabled()
@@ -80,7 +80,7 @@ struct SignUp: View {
                         
                         SecureField("", text: $password)
                             .padding()
-                            .background(Color.white.opacity(0.9))
+                            .background(Color.white)
                             .cornerRadius(10)
                             .autocapitalization(.none)
                     }
@@ -106,7 +106,7 @@ struct SignUp: View {
                     
                     HStack {
                         Text("Already have an account? ")
-                            .foregroundColor(.white.opacity(0.8))
+                            .foregroundColor(.white)
                             .fontWeight(.bold)
                         
                         Button(action: {
@@ -161,7 +161,6 @@ struct SignUp: View {
                 switch result {
                 case .success(_):
                     print("Registration success")
-                    isLoggedIn = true
                     dismiss()
                 case .failure(let error):
                     errorMessage = error.localizedDescription
@@ -174,7 +173,7 @@ struct SignUp: View {
 
 
 #Preview {
-    SignUp(isLoggedIn: .constant(false))
+    SignUp()
         .environmentObject(AuthManager())
 }
 

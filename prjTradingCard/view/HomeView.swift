@@ -6,6 +6,7 @@ struct HomeView: View {
     @State private var goToSettings = false
     @State private var goToCollection = false
     @State private var goToSocial = false
+    @EnvironmentObject var authManager: AuthManager
     
     var body: some View {
         // Wrap the entire UI in a NavigationStack so NavigationLink will work
@@ -60,7 +61,7 @@ struct HomeView: View {
                                         
                                     }
                                 }
-                                
+                                 
                                 if let username = viewModel.user?.username {
                                     Text(username)
                                         .font(.system(size: 14, weight: .medium))
@@ -151,7 +152,9 @@ struct HomeView: View {
                 viewModel.loadUser()
             }
             .navigationDestination(isPresented: $goToSettings) {
-                SettingsView(isLoggedIn: .constant(false))
+                SettingsView()
+                    .environmentObject(AuthManager())
+                
             }
             .navigationDestination(isPresented: $goToCollection) {
                 UserCollectionView()
@@ -195,7 +198,7 @@ struct PackOpeningSectionView: View {
                     PackCardView(
                         colors: [Color.orange, Color.red],
                         title: "MEGA RISING",
-                        subtitle: "Mega Blaziken"
+                        subtitle: "Dragoonite"
                     )
                     .offset(y: 10)
                     .zIndex(1)
@@ -231,7 +234,7 @@ struct PackOpeningSectionView: View {
                         HStack(spacing: 5) {
                             Image(systemName: "suit.diamond.fill")
                                 .foregroundColor(.yellow)
-                            Text("le anh jeff")
+                            Text("Open Pack")
                                 .font(.system(size: 16, weight: .bold))
                                 .foregroundColor(.black)
                         }
@@ -331,5 +334,6 @@ struct PackCardView: View {
 struct Preview_HomeView: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(AuthManager())
     }
 }
