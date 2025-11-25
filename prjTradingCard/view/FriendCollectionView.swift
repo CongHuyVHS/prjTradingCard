@@ -166,7 +166,9 @@ struct FriendCollectionView: View {
             }
         }
         .onAppear {
-            viewModel.fetchUserCollection()
+            if let friendId = friend.id {
+                viewModel.fetchFriendCollection(userId: friendId)
+            }
         }
     }
 }
