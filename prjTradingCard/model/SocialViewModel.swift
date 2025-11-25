@@ -38,7 +38,7 @@ class SocialViewModel: ObservableObject {
         
         isLoading = true
         
-        // Load friends from Firestore
+        // load friends from firestore
         db.collection("users").document(userId).collection("friends")
             .addSnapshotListener { [weak self] snapshot, error in
                 guard let self = self else { return }
@@ -67,7 +67,7 @@ class SocialViewModel: ObservableObject {
     func filterFriends() {
         var filtered = friends
         
-        // Apply category filter
+        // apply category filter
         switch selectedFilter {
         case .all:
             filtered = friends.filter { $0.friendshipStatus == .accepted }
@@ -79,7 +79,7 @@ class SocialViewModel: ObservableObject {
             filtered = friends.filter { $0.friendshipStatus == .accepted && $0.isFavorite }
         }
         
-        // Apply search filter
+        // apply search filter
         if !searchText.isEmpty {
             filtered = filtered.filter { $0.username.lowercased().contains(searchText.lowercased()) }
         }
@@ -108,7 +108,7 @@ class SocialViewModel: ObservableObject {
             friends[index].isFavorite.toggle()
             let newFavoriteStatus = friends[index].isFavorite
             
-            // Update in Firestore
+            // update in firestore
             db.collection("users").document(currentUserId)
                 .collection("friends").document(friendId)
                 .updateData(["isFavorite": newFavoriteStatus]) { error in
@@ -129,7 +129,7 @@ class SocialViewModel: ObservableObject {
             return
         }
         
-        // Update friendship status to accepted
+        // update friendship status to accepted
         db.collection("users").document(currentUserId)
             .collection("friends").document(friendId)
             .updateData([
@@ -177,7 +177,7 @@ class SocialViewModel: ObservableObject {
         
         isLoading = true
         
-        // Find user by username
+        // find user by username
         db.collection("users").whereField("username", isEqualTo: username).getDocuments { [weak self] snapshot, error in
             guard let self = self else { return }
             
@@ -200,26 +200,26 @@ class SocialViewModel: ObservableObject {
                 return
             }
             
-            // Check if trying to add yourself
+            // check if trying to add yourself
             if friendId == currentUserId {
                 completion(false, "You cannot add yourself as a friend")
                 return
             }
             
-            // Check if already friends or request exists
+            // check if already friends or request exists
             if self.friends.contains(where: { $0.id == friendId }) {
                 completion(false, "Friend request already exists or already friends")
                 return
             }
             
-            // Get current user data
+            // get current user data
             self.db.collection("users").document(currentUserId).getDocument { currentUserDoc, error in
                 guard let currentUserData = try? currentUserDoc?.data(as: User.self) else {
                     completion(false, "Could not load your user data")
                     return
                 }
                 
-                // Create friend request for current user (status: sent)
+                // create friend request for current user (status: sent)
                 let sentRequest = Friend(
                     id: friendId,
                     username: friendData.username,
@@ -230,7 +230,7 @@ class SocialViewModel: ObservableObject {
                     isFavorite: false
                 )
                 
-                // Create friend request for target user (status: pending)
+                // create friend request for target user (status: pending)
                 let pendingRequest = Friend(
                     id: currentUserId,
                     username: currentUserData.username,
@@ -242,11 +242,11 @@ class SocialViewModel: ObservableObject {
                 )
                 
                 do {
-                    // Add to current user's friends (sent status)
+                    // add to current user's friends (sent status)
                     try self.db.collection("users").document(currentUserId)
                         .collection("friends").document(friendId).setData(from: sentRequest)
                     
-                    // Add to target user's friends (pending status)
+                    // add to target user's friends (pending status)
                     try self.db.collection("users").document(friendId)
                         .collection("friends").document(currentUserId).setData(from: pendingRequest)
                     

@@ -11,7 +11,6 @@ struct FriendView: View {
     @StateObject private var viewModel = SocialViewModel()
      @State private var showAddFriend = false
      @State private var selectedFriend: Friend?
-     @State private var showFriendDetail = false
      
      var body: some View {
          ZStack {
@@ -123,7 +122,6 @@ struct FriendView: View {
                                  FriendRowView(friend: friend, viewModel: viewModel)
                                      .onTapGesture {
                                          selectedFriend = friend
-                                         showFriendDetail = true
                                      }
                              }
                          }
@@ -166,11 +164,9 @@ struct FriendView: View {
          .sheet(isPresented: $showAddFriend) {
              AddFriendView(viewModel: viewModel)
          }
-         .sheet(isPresented: $showFriendDetail) {
-             if let friend = selectedFriend {
-                 FriendDetailView(friend: friend, viewModel: viewModel)
-             }
-         }
+         .sheet(item: $selectedFriend) { friend in
+             FriendDetailView(friend: friend, viewModel: viewModel)
+         } 
          .navigationBarTitleDisplayMode(.inline)
          .navigationTitle("Friends")
      }
